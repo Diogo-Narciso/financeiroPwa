@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+  <NFe>
+    <infNFe Id="NFe35240111222333000181550010000000011000000010" versao="4.00">
+      <ide>
+        <cUF>35</cUF>
+        <natOp>Compra para comercializacao</natOp>
+        <mod>55</mod>
+        <serie>1</serie>
+        <nNF>1</nNF>
+        <dhEmi>2024-01-15T10:00:00-03:00</dhEmi>
+        <tpNF>1</tpNF>
+        <idDest>2</idDest>
+        <finNFe>1</finNFe>
+      </ide>
+      <emit>
+        <CNPJ>60746948000112</CNPJ>
+        <xNome>FORNECEDOR DEMO LTDA</xNome>
+        <enderEmit><UF>SP</UF></enderEmit>
+      </emit>
+      <dest>
+        <CNPJ>11222333000181</CNPJ>
+        <xNome>EMPRESA DESTINO DEMO</xNome>
+        <enderDest><UF>RJ</UF></enderDest>
+      </dest>
+      <det nItem="1">
+        <prod>
+          <cProd>SKU1</cProd>
+          <cEAN>SEM GTIN</cEAN>
+          <xProd>Produto demonstracao uso consumo</xProd>
+          <NCM>96039000</NCM>
+          <CFOP>6102</CFOP>
+          <uCom>UN</uCom>
+          <qCom>2.0000</qCom>
+          <vUnCom>50.0000000000</vUnCom>
+          <vProd>100.00</vProd>
+        </prod>
+        <imposto>
+          <ICMS>
+            <ICMS00>
+              <orig>0</orig>
+              <CST>00</CST>
+              <vBC>100.00</vBC>
+              <pICMS>12.00</pICMS>
+              <vICMS>12.00</vICMS>
+            </ICMS00>
+          </ICMS>
+        </imposto>
+      </det>
+      <total><ICMSTot><vNF>100.00</vNF></ICMSTot></total>
+    </infNFe>
+  </NFe>
+  <protNFe>
+    <infProt>
+      <chNFe>35240111222333000181550010000000011000000010</chNFe>
+      <nProt>135240000000001</nProt>
+      <cStat>100</cStat>
+    </infProt>
+  </protNFe>
+</nfeProc>

@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@portal-difal/db": "workspace:*",
+    "@portal-difal/nfe-parser": "workspace:*",
     "@portal-difal/shared": "workspace:*",
     "bcryptjs": "^3.0.3",
+    "fast-xml-parser": "^5.12.1",
+    "jszip": "^3.10.2",
     "next": "^15.1.3",
     "pg": "^8.13.1",
     "react": "^19.0.0",

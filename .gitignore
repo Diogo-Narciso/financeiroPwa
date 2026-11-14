@@ -24,3 +24,7 @@ Thumbs.db
 # local scratch
 .tmp/
 .local/
+
+# private document storage
+storage/
+!.gitkeep

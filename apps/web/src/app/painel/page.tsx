@@ -23,6 +23,7 @@ export default async function PainelPage() {
         </Link>
         <div className={styles.navLinks}>
           <Link href="/empresas">Empresas</Link>
+          <Link href="/importar">Importar</Link>
           <span className={styles.chip}>{user.orgName}</span>
           <span className={styles.muted}>{user.email}</span>
           <LogoutButton />

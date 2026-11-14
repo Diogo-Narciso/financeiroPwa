@@ -4,7 +4,7 @@
 
 SaaS fiscal multiempresa para escritórios e empresas no Brasil (início RJ). **Um produto, dois canais:** aplicativo **web** (navegador) e **mobile** (PWA instalável ou shell nativo), compartilhando a mesma conta, as mesmas regras e o mesmo backend.
 
-> **Etapa atual: E1 — Cadastro e teste.** Login/cadastro, organizações, empresas (CNPJ), perfil tributário, questionário e cotas do teste no servidor (3 CNPJs / 5 NF-e). Sem alíquotas inventadas. Importação XML = E2. PWA/mobile depois.
+> **Etapa atual: E2 — Documentos.** Login/cadastro, organizações, empresas (CNPJ), perfil tributário, questionário e cotas do teste no servidor (3 CNPJs / 5 NF-e). Sem alíquotas inventadas. Importação XML = E2. PWA/mobile depois.
 
 ## Como rodar localmente
 
@@ -24,6 +24,7 @@ pnpm dev                # http://127.0.0.1:3000
 
 # Smoke das cotas E1 (com o dev server no ar)
 pnpm e1:smoke
+pnpm e2:smoke
 ```
 
 Saúde:
