@@ -1,0 +1,111 @@
+{
+  "document_type": "arithmetic_demonstration_fixtures",
+  "version": "1.4",
+  "date": "2026-11-10",
+  "warning": "Os exemplos verificam somente aritmética sob premissas explícitas. Não são regras fiscais, não comprovam enquadramento e não podem ativar cálculo de produção. A política de arredondamento efetiva precisa de homologação independente.",
+  "decimal_encoding": "strings; rates expressed as fractions, not percentage points",
+  "automatic_fiscal_application_enabled": false,
+  "cases": [
+    {
+      "id": "ARIT-A",
+      "title": "Recomposicao ilustrativa e divergencia de arredondamento",
+      "legal_status": "not_homologated_arithmetic_only",
+      "inputs": {
+        "operation_value": "1000.00",
+        "origin_amount": "120.00",
+        "gross_up_rate_fraction": "0.22",
+        "destination_icms_fraction": "0.20",
+        "fecp_fraction": "0.02"
+      },
+      "illustrative_formula": {
+        "base": "(operation_value - origin_amount) / (1 - gross_up_rate_fraction)",
+        "icms_differential": "base * destination_icms_fraction - origin_amount",
+        "fecp": "base * fecp_fraction"
+      },
+      "precision_digits_used_to_generate_reference": 40,
+      "unrounded_reference": {
+        "base": "1128.205128205128205128205128205128205128",
+        "icms_differential": "105.6410256410256410256410256410256410256",
+        "fecp": "22.56410256410256410256410256410256410256",
+        "sum": "128.2051282051282051282051282051282051282"
+      },
+      "rounding_mode": "ROUND_HALF_UP",
+      "expected_rounded": {
+        "icms_differential": "105.64",
+        "fecp": "22.56",
+        "sum_of_rounded_components": "128.20",
+        "rounded_unrounded_sum": "128.21"
+      }
+    },
+    {
+      "id": "ARIT-B",
+      "title": "Cargas equivalentes sob formula ilustrativa",
+      "legal_status": "not_homologated_arithmetic_only",
+      "inputs": {
+        "operation_value": "1000.00",
+        "origin_amount": "88.00",
+        "gross_up_rate_fraction": "0.088",
+        "destination_icms_fraction": "0.088",
+        "fecp_fraction": "0.00"
+      },
+      "illustrative_formula": {
+        "base": "(operation_value - origin_amount) / (1 - gross_up_rate_fraction)",
+        "icms_differential": "base * destination_icms_fraction - origin_amount",
+        "fecp": "base * fecp_fraction"
+      },
+      "precision_digits_used_to_generate_reference": 40,
+      "unrounded_reference": {
+        "base": "1.00E+3",
+        "icms_differential": "0.00",
+        "fecp": "0.0",
+        "sum": "0.00"
+      },
+      "rounding_mode": "ROUND_HALF_UP",
+      "expected_rounded": {
+        "icms_differential": "0.00",
+        "fecp": "0.00",
+        "sum_of_rounded_components": "0.00",
+        "rounded_unrounded_sum": "0.00"
+      }
+    },
+    {
+      "id": "ARIT-C",
+      "title": "Origem 4% e destino 8,8% sob formula ilustrativa",
+      "legal_status": "not_homologated_arithmetic_only",
+      "inputs": {
+        "operation_value": "1000.00",
+        "origin_amount": "40.00",
+        "gross_up_rate_fraction": "0.088",
+        "destination_icms_fraction": "0.088",
+        "fecp_fraction": "0.00"
+      },
+      "illustrative_formula": {
+        "base": "(operation_value - origin_amount) / (1 - gross_up_rate_fraction)",
+        "icms_differential": "base * destination_icms_fraction - origin_amount",
+        "fecp": "base * fecp_fraction"
+      },
+      "precision_digits_used_to_generate_reference": 40,
+      "unrounded_reference": {
+        "base": "1052.631578947368421052631578947368421053",
+        "icms_differential": "52.63157894736842105263157894736842105266",
+        "fecp": "0E-38",
+        "sum": "52.63157894736842105263157894736842105266"
+      },
+      "rounding_mode": "ROUND_HALF_UP",
+      "expected_rounded": {
+        "icms_differential": "52.63",
+        "fecp": "0.00",
+        "sum_of_rounded_components": "52.63",
+        "rounded_unrounded_sum": "52.63"
+      }
+    }
+  ],
+  "mandatory_assertions": [
+    "ARIT-A: soma dos componentes arredondados = 128.20",
+    "ARIT-A: arredondamento somente do total = 128.21",
+    "ARIT-B: diferencial ilustrativo = 0.00",
+    "ARIT-C: diferencial ilustrativo = 52.63",
+    "Alterar a taxa de recomposição deve alterar o divisor; não usar 0.78 fixo.",
+    "Resultado zero de um exemplo não confirma benefício de um produto real."
+  ]
+}

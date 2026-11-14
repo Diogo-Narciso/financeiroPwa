@@ -1,0 +1,89 @@
+{
+  "project": "Portal Inteligente de DIFAL",
+  "package_version": "1.4",
+  "date": "2026-11-10",
+  "encoding": "UTF-8 for text files",
+  "purpose": "Documentacao consolidada para desenvolvimento; nao contem aplicativo pronto",
+  "main_document": "01_ESPECIFICACAO_CONSOLIDADA.md",
+  "file_count_excluding_manifest": 11,
+  "acceptance_test_cases_specified": 111,
+  "acceptance_test_cases_executed_on_software": 0,
+  "package_checks": [
+    "JSONs parseaveis",
+    "MDs principais com blocos de codigo equilibrados",
+    "links relativos conferidos",
+    "IDs de fontes presentes",
+    "IDs de testes unicos",
+    "5 arquivos originais com bytes preservados",
+    "exemplos NCM desativados",
+    "aritmetica demonstrativa conferida"
+  ],
+  "notes": "Este manifesto nao inclui seu proprio hash para evitar referencia circular. Os testes especificados nao foram executados em um aplicativo, que nao faz parte desta entrega.",
+  "files": [
+    {
+      "path": "00_LEIA_ME.md",
+      "bytes": 4606,
+      "sha256": "78acdf83913efb3a8c5361edb05b7e137b7eb1b74743d3c1dce5f6a0b91876ef"
+    },
+    {
+      "path": "01_ESPECIFICACAO_CONSOLIDADA.md",
+      "bytes": 62340,
+      "sha256": "68221892f5f4cb2db8d0d0376beec3bf73598e8a2f7d49c50549bfa5864ba404"
+    },
+    {
+      "path": "02_ENTREGAS_E_TESTES.md",
+      "bytes": 17135,
+      "sha256": "c668dd0a867e22b03636e7a01ae63657db0e26a0c55fde127c6163b7ba1b99a3"
+    },
+    {
+      "path": "03_FONTES_E_PENDENCIAS.md",
+      "bytes": 12581,
+      "sha256": "99b0f52b606cb4c53b38ad5d5617b2c5710e4690e1c73238436b553d02bf3436"
+    },
+    {
+      "path": "apoio/BASE_EXEMPLOS_CONVENIO_52_91_V1_2.json",
+      "bytes": 7537,
+      "sha256": "61c95a66347d61cedf36fcd556dad9c767b3047e6fc41225075283329515726f",
+      "original_upload_filename": "BASE_EXEMPLOS_CONVENIO_52_91_V1_2.json",
+      "original_bytes_preserved": true
+    },
+    {
+      "path": "apoio/CASOS_ARITMETICOS_DEMONSTRACAO.json",
+      "bytes": 4345,
+      "sha256": "6afbfab4f0c235be67b75a0a79966a6ee4abf8376843e8963a3d8947a14cbeae"
+    },
+    {
+      "path": "apoio/CONFIGURACAO_INICIAL_REFERENCIA.json",
+      "bytes": 4447,
+      "sha256": "0b4877fb84bd28718cc69c4feba0a99ba478eb9b0ed2e7bc1559f7284e0efc9d"
+    },
+    {
+      "path": "apoio/PLANILHA_MODELO_DIFAL_ORIGINAL.xlsx",
+      "bytes": 113410,
+      "sha256": "a4d7913ed2837443e2a288e2348f844d6d4ba158229ec1486f3f95558f2e923d",
+      "original_upload_filename": "CALCULO DIFERENCAL DE ALIQUOTA - POR DENTRO e POR FORA.xlsx",
+      "original_bytes_preserved": true
+    },
+    {
+      "path": "historico/ADENDO_AVISOS_PLANOS_CONTRATOS_V1_3.md",
+      "bytes": 23632,
+      "sha256": "72781cc4e0aedd68aecefe4075bd1f91461a58d118e22da8d8f670be70b92302",
+      "original_upload_filename": "ADENDO_AVISOS_PLANOS_CONTRATOS_V1_3.md",
+      "original_bytes_preserved": true
+    },
+    {
+      "path": "historico/ADENDO_BENEFICIOS_CONVENIO_52_91_V1_2.md",
+      "bytes": 17672,
+      "sha256": "9d6e5f370ef9203d8d0b07f008cde719876036659473d73b655f8c48b97d0d63",
+      "original_upload_filename": "ADENDO_BENEFICIOS_CONVENIO_52_91_V1_2.md",
+      "original_bytes_preserved": true
+    },
+    {
+      "path": "historico/COMANDO_MESTRE_PORTAL_DIFAL.md",
+      "bytes": 40007,
+      "sha256": "5ef496acba0f3564255dcbb43dc9402d3e8e35363808368c2037884ad7d1eed9",
+      "original_upload_filename": "COMANDO_MESTRE_PORTAL_DIFAL.md",
+      "original_bytes_preserved": true
+    }
+  ]
+}

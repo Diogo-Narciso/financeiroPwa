@@ -1,0 +1,133 @@
+{
+  "document_type": "implementation_reference_not_runtime_configuration",
+  "specification_version": "1.4",
+  "date": "2026-11-10",
+  "locale": "pt-BR",
+  "currency": "BRL",
+  "display_timezone": "America/Sao_Paulo",
+  "warning": "Referência técnica. Nenhum null significa zero, oferta gratuita, regra legal ou autorização para produção. Preencher e homologar antes de ativar.",
+  "trial": {
+    "max_distinct_company_cnpjs": 3,
+    "max_unique_valid_entry_invoices_per_company": 5,
+    "cnpj_binding_scope": "organization_lifetime_subject_to_approved_retention_policy",
+    "self_service_cnpj_replacement": false,
+    "same_key_reimport_consumes_quota": false,
+    "invalid_upload_consumes_quota": false,
+    "exit_catalog_import_consumes_entry_quota": false,
+    "requires_payment_card": false,
+    "automatic_conversion_to_paid": false,
+    "expiry_days": null,
+    "counting_mode": "atomic_reservation_then_commit",
+    "expired_or_deleted_data_reopens_trial": false
+  },
+  "scope": {
+    "initial_destination_ufs": [
+      "RJ"
+    ],
+    "entry_xml_analysis_without_product_catalog": true,
+    "initial_tax_module": "difal_aquisicao_contribuinte",
+    "difal_st": "requires_specific_rule_homologation",
+    "sale_to_non_taxpayer_module_enabled": false,
+    "guide_generation_or_payment_enabled": false,
+    "efd_transmission_enabled": false,
+    "automatic_refund_claims_enabled": false
+  },
+  "tax_rules": {
+    "production_enabled": false,
+    "release_condition": "approved_rule_version_and_required_facts_by_operation",
+    "missing_parameter_behavior": "pending_not_zero",
+    "arithmetic": "decimal_exact",
+    "transport_of_money_and_rates": "decimal_strings",
+    "rounding_policy": null,
+    "rule_source_required": true,
+    "automatic_future_validity_extension": false,
+    "default_rates": null
+  },
+  "benefit_catalog": {
+    "first_reference": "Convenio ICMS 52/91",
+    "example_seed_file": "BASE_EXEMPLOS_CONVENIO_52_91_V1_2.json",
+    "seed_complete": false,
+    "seed_automatic_fiscal_application_enabled": false,
+    "ncm_only_is_sufficient": false,
+    "acknowledgement_required_for_selected_benefit": true,
+    "acknowledgement_resolves_missing_facts": false
+  },
+  "retention": {
+    "xml_st_field_alone_excludes_difal": false,
+    "xml_highlight_equals_payment_proof": false,
+    "separate_incidence_responsibility_retention_payment": true,
+    "deduct_entire_invoice_st_from_difal_by_default": false
+  },
+  "manual_decision": {
+    "available": true,
+    "checkbox_default": false,
+    "actions": [
+      "include_difal",
+      "exclude_difal",
+      "return_to_system_analysis"
+    ],
+    "reason_required": true,
+    "technical_result_preserved": true,
+    "fecp_requires_explicit_review": true,
+    "future_propagation_automatic": false,
+    "fiscal_homologation_implied": false
+  },
+  "export": {
+    "original_xml_immutable": true,
+    "generate_modified_authorized_nfe": false,
+    "generic_mapping_available_after_implementation": true,
+    "first_erp": null,
+    "first_erp_homologated": false,
+    "manual_decisions_labeled": true
+  },
+  "commercial": {
+    "capacity_plan_names": [
+      "Inicial",
+      "Escritorio",
+      "Profissional",
+      "Empresarial"
+    ],
+    "price_values": null,
+    "paid_usage_limits": null,
+    "discount_values": null,
+    "contract_modes": [
+      "monthly_flexible",
+      "six_month_commitment",
+      "annual_commitment",
+      "negotiated"
+    ],
+    "standard_commitment_months": [
+      6,
+      12
+    ],
+    "billing_intervals": [
+      "monthly",
+      "prepaid_term"
+    ],
+    "post_term_price_rule": null,
+    "offers_publishable": false
+  },
+  "renewal": {
+    "default_policy": "continuous_service_without_new_commitment",
+    "fixed_term_policy": "fixed_term_auto_renewal_reviewed",
+    "fixed_term_policy_enabled": false,
+    "legal_review_status": "pending",
+    "non_renewal_notice_period_days": null,
+    "notification_schedule_days": null,
+    "initial_commitment_restarts_on_payment": false
+  },
+  "cancellation": {
+    "fee_policy_status": "pending_legal_approval",
+    "fee_formula": null,
+    "fee_rate": null,
+    "request_blocked_by_disputed_fee": false,
+    "applicable_statutory_rights_preserved": true
+  },
+  "privacy": {
+    "retention_policy_approved": false,
+    "retention_periods": null,
+    "external_ai_document_upload_enabled": false,
+    "tenant_isolation_required": true,
+    "public_real_data_fixtures_allowed": false
+  }
+}
