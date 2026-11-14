@@ -4,86 +4,94 @@
 
 SaaS fiscal multiempresa para escritórios e empresas no Brasil (início RJ). **Um produto, dois canais:** aplicativo **web** (navegador) e **mobile** (PWA instalável ou shell nativo), compartilhando a mesma conta, as mesmas regras e o mesmo backend.
 
-> Status atual: documentação e escopo versionados neste repositório. **Implementação da aplicação ainda não iniciada** (código legado inacessível). Próximo passo técnico: etapa **E0 — Fundação**.
+> **Etapa atual: E0 — Fundação.** Monorepo TypeScript, Postgres, rota de saúde e casca da UI. Sem login, quotas, motor fiscal ou regras tributárias inventadas. Cliente PWA/mobile virá depois, no mesmo backend.
 
-## O que o produto entrega
+## Como rodar localmente
+
+Pré-requisitos: Node.js ≥ 20, [pnpm](https://pnpm.io/) 9+, Docker **ou** PostgreSQL 16.
+
+```bash
+pnpm install
+cp .env.example .env
+
+# Banco (Docker recomendado)
+docker compose up -d
+# — ou — Postgres local com DATABASE_URL apontando para portal_difal
+
+pnpm db:migrate
+pnpm db:status          # opcional
+pnpm dev                # http://127.0.0.1:3000
+```
+
+Saúde:
+
+```bash
+curl -s http://127.0.0.1:3000/api/health
+```
+
+Esperado com banco no ar: `{ "status": "ok", "checks": { "database": "up" } }`.
+
+## Estrutura (E0)
+
+```text
+apps/web/              # Next.js — casca UI + /api/health
+packages/shared/       # tipos e constantes
+packages/db/           # cliente Postgres + runner de migrações
+infra/migrations/      # SQL versionado (001_foundation)
+docs/                  # especificação v1.4 (já versionada)
+```
+
+Pacotes futuros (parser, tax-engine, worker, cliente PWA/mobile) não fazem parte desta etapa.
+
+## O que o produto entrega (visão)
 
 1. Cadastro de organizações, usuários e estabelecimentos (CNPJ)
 2. Importação de XML de NF-e de entrada (saídas / catálogo opcionais)
-3. Classificação de itens (revenda, consumo, ativo, etc.) com sugestão explicável
+3. Classificação de itens com sugestão explicável
 4. Cálculo de DIFAL / FECP com regras **versionadas** e auditoria
-5. Revisão manual com motivo e histórico (sem apagar a análise automática)
+5. Revisão manual com motivo e histórico
 6. Exportação para escrituração **sem alterar** o XML autorizado
-7. Teste gratuito com quotas (**3 CNPJs**, **5 NF-e de entrada por CNPJ**) e planos / cobrança em etapa posterior
+7. Teste gratuito (3 CNPJs, 5 NF-e/CNPJ) e planos / cobrança depois
 
-Resumo canônico: [`docs/escopo-produto.md`](docs/escopo-produto.md).
-
-## Canais (web + app)
-
-| Canal | Papel |
-|---|---|
-| **Web** | Site, painel, importação, revisão, cálculo, exportação, assinatura |
-| **Mobile / PWA** | Mesmo produto em cliente móvel (PWA ou shell nativo), mesmo backend |
-
-Não são dois produtos separados: é o Portal Inteligente de DIFAL em dois pontos de acesso.
+Resumo: [`docs/escopo-produto.md`](docs/escopo-produto.md).
 
 ## Princípios inegociáveis
 
-- A **IA não inventa** NCM, alíquotas, reduções, CFOP ou fundamento legal
-- Sem dado verificável / regra homologada → **pendente de validação** (nunca imposto zero por omissão)
-- **XML autorizado imutável**; CFOP de escrituração só em arquivo auxiliar / adaptador ERP
+- A **IA não inventa** NCM, alíquotas, CFOP ou fundamento legal
+- Sem dado verificável → **pendente de validação**
+- **XML autorizado imutável**; CFOP de escrituração só em auxiliar
 - Decisão fiscal final é do **usuário / contador**
-- Não publicar regras ou preços não homologados como definitivos
 
-## Stack planejada
+## Stack
 
 | Camada | Escolha |
 |---|---|
-| Linguagem | TypeScript |
-| Web | Next.js (App Router) + API / server actions |
-| Mobile | PWA e/ou shell nativo consumindo o mesmo backend |
-| Dados | PostgreSQL + migrações versionadas |
-| Organização | Monorepo (`apps` + `packages`) quando a implementação começar |
+| Monorepo | pnpm workspaces |
+| Web | Next.js 15 + TypeScript |
+| Mobile (depois) | PWA / shell nativo, mesmo backend |
+| Dados | PostgreSQL 16 + `infra/migrations` |
 
-Detalhes: [`docs/01_ESPECIFICACAO_CONSOLIDADA.md`](docs/01_ESPECIFICACAO_CONSOLIDADA.md) e [`docs/plano-rebuild.md`](docs/plano-rebuild.md).
+## Etapas E0–E7
 
-## Etapas de entrega (E0–E7)
-
-| Etapa | Conteúdo | Aceite (resumo) |
-|---|---|---|
-| **E0** Fundação | Repo, arquitetura, banco, ambientes, identidade | Roda local; migrações; isolamento inicial |
-| **E1** Cadastro e teste | Site, login, orgs, empresas, quotas | 3 CNPJs e 5 entradas/CNPJ no servidor |
-| **E2** Documentos | Upload XML/ZIP, parsing, storage | Originais preservados; duplicidade controlada |
-| **E3** Revisão | Classificação, ST/retenção, manual, auditoria | Análise original preservada |
-| **E4** Motor | Regras versionadas, DIFAL/FECP, benefícios | Aritmética reproduzível; faltas → pendência |
-| **E5** Escrituração | CFOP por item, ZIP, adaptador ERP | Hash do XML original idêntico |
-| **E6** Cobrança | Planos, contrato, pagamentos | Contrato imutável; cobrança idempotente |
-| **E7** Homologação | Segurança, fiscal, jurídico, publicação | Checklist de lançamento aprovado |
-
-Roteiro completo e matriz de testes: [`docs/02_ENTREGAS_E_TESTES.md`](docs/02_ENTREGAS_E_TESTES.md).
-
-## Documentação neste repositório
-
-Comece por [`docs/00_LEIA_ME.md`](docs/00_LEIA_ME.md).
-
-| Caminho | Conteúdo |
+| Etapa | Conteúdo |
 |---|---|
-| [`docs/escopo-produto.md`](docs/escopo-produto.md) | Escopo web + app e princípios |
-| [`docs/01_ESPECIFICACAO_CONSOLIDADA.md`](docs/01_ESPECIFICACAO_CONSOLIDADA.md) | Especificação principal (v1.4) |
-| [`docs/02_ENTREGAS_E_TESTES.md`](docs/02_ENTREGAS_E_TESTES.md) | Etapas e testes de aceite |
-| [`docs/03_FONTES_E_PENDENCIAS.md`](docs/03_FONTES_E_PENDENCIAS.md) | Fontes e decisões pendentes |
-| [`docs/plano-rebuild.md`](docs/plano-rebuild.md) | Plano de rebuild deste repositório |
-| [`docs/COMANDO_MESTRE_PORTAL_DIFAL_e49c.md`](docs/COMANDO_MESTRE_PORTAL_DIFAL_e49c.md) | Prompt / restrições de implementação |
-| [`docs/apoio/`](docs/apoio/) | Planilha modelo, JSON de exemplos e configuração de referência |
-| [`docs/historico/`](docs/historico/) | Adendos anteriores (rastreabilidade) |
-| [`docs/MANIFESTO_ARQUIVOS_SHA256.json`](docs/MANIFESTO_ARQUIVOS_SHA256.json) | Inventário e hashes do pacote |
+| **E0** Fundação | Repo, DB, health, casca UI ← *esta entrega* |
+| **E1** Cadastro e teste | Login, orgs, empresas, quotas |
+| **E2** Documentos | Upload XML/ZIP, storage imutável |
+| **E3** Revisão | Classificação, ST, manual, auditoria |
+| **E4** Motor | DIFAL/FECP, benefícios versionados |
+| **E5** Escrituração | CFOP auxiliar, ZIP, adaptador ERP |
+| **E6** Cobrança | Planos, contrato, pagamentos |
+| **E7** Homologação | Segurança, fiscal, publicação |
 
-**Em conflito de redação funcional, prevalece a especificação consolidada.** Norma aplicável e homologação profissional prevalecem sobre exemplos.
+Detalhes: [`docs/02_ENTREGAS_E_TESTES.md`](docs/02_ENTREGAS_E_TESTES.md). Documentação completa: [`docs/00_LEIA_ME.md`](docs/00_LEIA_ME.md).
 
-## Confidencialidade
+## Aceite E0
 
-Repositório **privado**. A planilha e os materiais de `docs/apoio/` são modelo de cálculo / referência — **não** regras fiscais homologadas e **não** devem ir para repositório público com dados reais de clientes. Credenciais, XMLs particulares e PII ficam fora do git.
-
-## Próximo passo
-
-Implementar **E0 — Fundação** (scaffold TypeScript, Next.js web, Postgres, migrações, health) e só então evoluir E1+. Até lá, este repositório documenta o produto e o roteiro de entrega.
+- [x] Monorepo TypeScript (`apps/web`, `packages/*`)
+- [x] Postgres + migração `001_foundation.sql`
+- [x] App sobe localmente (`pnpm dev`)
+- [x] `/api/health` + shell UI sóbrio (teal/cinza/branco)
+- [x] `docs/` preservados
+- [ ] Auth multi-tenant / RLS completo → E1+
+- [ ] Cliente PWA/mobile → etapa posterior

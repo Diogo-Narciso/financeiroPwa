@@ -1,0 +1,18 @@
+{
+  "name": "portal-difal",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Portal Inteligente de DIFAL — monorepo (Oliveira Contabilidade)",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @portal-difal/web dev",
+    "build": "pnpm -r --if-present build",
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "db:migrate": "pnpm --filter @portal-difal/db migrate",
+    "db:status": "pnpm --filter @portal-difal/db status"
+  }
+}
