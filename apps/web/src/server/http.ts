@@ -3,6 +3,7 @@ import { AuthError } from "./session";
 import { QuotaError } from "./quotas";
 import { AuthServiceError } from "./auth-service";
 import { BillingError } from "./billing";
+import { HomologationError } from "./homologation";
 
 export function jsonOk(data: unknown, status = 200) {
   return NextResponse.json(data, { status });
@@ -19,6 +20,12 @@ export function jsonError(error: unknown) {
     );
   }
   if (error instanceof BillingError) {
+    return NextResponse.json(
+      { error: error.message, code: error.code },
+      { status: error.status },
+    );
+  }
+  if (error instanceof HomologationError) {
     return NextResponse.json(
       { error: error.message, code: error.code },
       { status: error.status },

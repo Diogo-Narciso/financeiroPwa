@@ -46,6 +46,6 @@ O histórico antigo (`aab6c3d` / 69 arquivos) ficou inacessível (agent arquivad
 - Decisão fiscal final é do usuário/contador
 - Não publicar regras/preços não homologados como definitivos
 
-## Próximo passo imediato
+## Status (2026-11-14)
 
-Implementar **E0** no repositório e abrir PR / force-push conforme combinado.
+E0–E6 entregues no `main`. E7 = scaffold de checklist/pendências (lançamento **não** aprovado). Produção bloqueada por regras `homologated`, pagamentos reais e ERP certificado — ver `docs/lancamento-checklist.md` e P01–P14 em `docs/03`.
