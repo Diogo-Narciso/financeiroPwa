@@ -55,6 +55,8 @@ export {
   evaluateEntryInvoiceQuota,
 } from "./quota-policy";
 export type { QuotaDecision } from "./quota-policy";
+export { RETENTION_POLICY } from "./retention-policy";
+export type { RetentionPolicy } from "./retention-policy";
 
 export const TAX_REGIMES = [
   "simples_nacional",
