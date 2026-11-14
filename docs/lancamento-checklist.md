@@ -23,7 +23,7 @@ Os itens também vivem no banco (`launch_checklist_items`, `activation_pendencie
 2. **Pagamentos reais** (P11) — hoje só `mock_sandbox`.
 3. **Certificação ERP** (P06) após importação real documentada.
 4. **Comercial/jurídico** (P07–P09, P12): preços oficiais, contratos, multa, emissão fiscal SaaS.
-5. **Privacidade** (P10) e **ops** (P13): LGPD operacional, backup/restore ensaiado, domínio/suporte.
+5. **Privacidade** (P10) e **ops** (P13): LGPD operacional — draft em [`lgpd-retencao.md`](./lgpd-retencao.md) + `RETENTION_POLICY` (shared); ainda **exige** revisão jurídica. Backup/restore ensaiado, domínio/suporte.
 
 ## Comandos
 

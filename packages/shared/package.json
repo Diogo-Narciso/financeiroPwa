@@ -8,7 +8,7 @@
   "exports": { ".": "./src/index.ts" },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test:unit": "tsx src/quota-policy.test.ts"
+    "test:unit": "tsx src/quota-policy.test.ts && tsx src/retention-policy.test.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
