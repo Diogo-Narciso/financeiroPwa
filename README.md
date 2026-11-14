@@ -2,7 +2,7 @@
 
 **Oliveira Contabilidade** · repositório privado · rebuild a partir da documentação v1.4
 
-SaaS fiscal multiempresa para escritórios e empresas no Brasil (início RJ). **Um produto, dois canais:** aplicativo **web** (navegador) e **mobile** (PWA instalável ou shell nativo), compartilhando a mesma conta, as mesmas regras e o mesmo backend.
+SaaS fiscal multiempresa para escritórios e empresas no Brasil (início RJ). **Um produto, dois canais no escopo:** aplicativo **web** (navegador, entregue em `apps/web`) e **mobile/PWA** (adiado — ver [`docs/ADR-001-canal-pwa-mobile.md`](docs/ADR-001-canal-pwa-mobile.md)). Mesma conta, regras e backend quando o canal mobile for promovido.
 
 > **Etapa atual: E7 — Homologação (scaffold).** E0–E6 entregues no monorepo. **Produção comercial ainda bloqueada** até: regras fiscais `homologated`, pagamentos reais, certificação ERP, e resolução das pendências P01–P14 (`docs/03`).
 
