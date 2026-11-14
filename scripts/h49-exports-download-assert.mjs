@@ -11,6 +11,18 @@ const route = readFileSync(
   "utf8",
 );
 assert.match(doc, /E-R03/);
-assert.match(route, /\["owner", "admin", "reviewer", "analyst"\]/);
+const literal = /\["owner", "admin", "reviewer", "analyst"\]/;
+if (!literal.test(route)) {
+  assert.match(route, /canAccessExportDownload/);
+  const gate = readFileSync(
+    join(root, "apps/web/src/server/export-download-role-gate.ts"),
+    "utf8",
+  );
+  assert.match(gate, /EXPORT_DOWNLOAD_ROLES/);
+  assert.match(gate, /"owner"/);
+  assert.match(gate, /"admin"/);
+  assert.match(gate, /"reviewer"/);
+  assert.match(gate, /"analyst"/);
+}
 assert.match(route, /403/);
 console.log("OK H49 exports download role align contract");
