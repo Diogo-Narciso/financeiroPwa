@@ -3,8 +3,8 @@ import { getHealth } from "@/lib/health";
 import styles from "./page.module.css";
 
 const STAGES = [
-  { id: "E0", title: "Fundação", detail: "Monorepo, banco, saúde e casca da aplicação.", active: true },
-  { id: "E1", title: "Cadastro e teste", detail: "Login, organizações, empresas e quotas.", active: false },
+  { id: "E0", title: "Fundação", detail: "Monorepo, banco, saúde e casca da aplicação.", active: false },
+  { id: "E1", title: "Cadastro e teste", detail: "Login, organizações, empresas e quotas.", active: true },
   { id: "E2", title: "Documentos", detail: "Upload XML/ZIP e storage imutável.", active: false },
   { id: "E3+", title: "Motor e escrituração", detail: "Classificação, DIFAL homologado e exportação.", active: false },
 ] as const;
@@ -33,7 +33,7 @@ export default async function HomePage() {
           </div>
         </div>
         <div className={styles.headerActions}>
-          <span className={styles.stageBadge}>E0 · Fundação</span>
+          <span className={styles.stageBadge}>E1 · Cadastro</span>
           <a className={styles.ghostLink} href="/api/health">
             /api/health
           </a>
@@ -42,9 +42,14 @@ export default async function HomePage() {
 
       <main className={styles.main}>
         <section className={styles.hero}>
-          <p className={styles.eyebrow}>Casca inicial — sem produto completo</p>
+          <p className={styles.eyebrow}>E1 — cadastro, empresas e cotas do teste</p>
           <h1 className={styles.title}>{APP_NAME}</h1>
           <p className={styles.lede}>{APP_TAGLINE}</p>
+          <p style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", margin: 0 }}>
+            <a className={styles.ghostLink} href="/cadastro">Teste gratuito</a>
+            <a className={styles.ghostLink} href="/login">Entrar</a>
+            <a className={styles.ghostLink} href="/painel">Painel</a>
+          </p>
         </section>
 
         <section className={styles.statusPanel} aria-labelledby="status-title">
@@ -81,9 +86,9 @@ export default async function HomePage() {
             </div>
           </div>
           <p className={styles.note}>
-            Esta tela é apenas a casca E0: monorepo TypeScript, migrações
-            reproduzíveis e rota de saúde. Login, quotas, importação XML, motor
-            DIFAL e cliente PWA/mobile entram nas etapas seguintes.
+            E1 adiciona cadastro/login, organizações, empresas (CNPJ), questionário
+            e cotas do teste no servidor (3 CNPJs / 5 NF-e). Sem regras fiscais de
+            alíquota. Importação XML é E2.
           </p>
         </section>
 
