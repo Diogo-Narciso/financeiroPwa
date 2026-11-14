@@ -2,50 +2,52 @@
 
 **Data:** 2026-11-14  
 **Repo:** https://github.com/Diogo-Narciso/financeiroPwa  
+**HEAD referência:** `main` @ pós-E7 (inclui H6–H9)  
 **Fonte:** pacote documentação v1.4 (não o app perdido `aab6c3d`)
 
 ## Situação
 
-O histórico antigo (`aab6c3d` / 69 arquivos) ficou inacessível (agent arquivado). Rebuild a partir da especificação consolidada e materiais de apoio em [Context](cursor.agent://project/context).
+Rebuild a partir da especificação consolidada. Monorepo E0–E7 entregue em `main`. Histórico antigo (`aab6c3d`) permanece inacessível.
 
 ## Canais
 
-- **Web** (navegador) e **aplicativo** (mobile / PWA instalável), mesmo backend e regras.
+- **Web:** `apps/web` (Next.js) — canal entregue.
+- **Mobile/PWA:** adiado — [`ADR-001-canal-pwa-mobile.md`](ADR-001-canal-pwa-mobile.md).
 
-## Stack proposta (E0)
+## Stack (realizada)
 
-- Monorepo TypeScript (apps + packages)
-- Next.js (web) + API/server actions
-- Cliente mobile/PWA compartilhando a API
-- Postgres + migrations
+- Monorepo pnpm / TypeScript (`apps/*`, `packages/*`)
+- Next.js web + rotas API
+- Postgres + `infra/migrations/001`…`008`
 - Auth multi-tenant (org/roles)
-- Preview local + push para `main` quando cada etapa estiver aceitável
+- CI: `pnpm typecheck` + `pnpm test:unit` (H7)
 
-## Ordem imediata
+## Packages
 
-1. README + docs de escopo no GitHub (antes do código)
-2. E0 fundação
-
-## Etapas (de `02_ENTREGAS_E_TESTES.md`)
-
-| Etapa | Escopo |
+| Package | Papel |
 |---|---|
-| E0 | Fundação: repo, arquitetura, DB, identidade, app sobe local |
-| E1 | Landing, login, orgs, empresas, quotas 3 CNPJ / 5 NF-e |
-| E2 | Upload XML/ZIP, parsing, storage imutável |
-| E3 | Classificação, revisão, auditoria |
-| E4 | Motor DIFAL + benefícios (regras versionadas; homologação separada) |
-| E5 | CFOP escrituração + export ZIP (XML original intacto) |
-| E6 | Planos / cobrança |
-| E7 | Homologação e publicação |
+| `@portal-difal/shared` | constantes, quotas policy |
+| `@portal-difal/db` | migrate / client |
+| `@portal-difal/nfe-parser` | XML NF-e + unit tests |
+| `@portal-difal/classifier` | sugestões |
+| `@portal-difal/tax-engine` | demo + `ruleStatus` gate (H9) |
+
+## Etapas
+
+| Etapa | Situação |
+|---|---|
+| E0–E6 | Entregues |
+| E7 | Scaffold homologação — lançamento **não** aprovado |
+| Pós-E7 | H6 unit tests · H7 CI · H8 ADR PWA · H9 gate demo≠homologated |
 
 ## Regras inegociáveis
 
 - IA não inventa NCM/alíquotas; faltas → “pendente de validação”
 - XML autorizado imutável; CFOP de escrituração é auxiliar
 - Decisão fiscal final é do usuário/contador
-- Não publicar regras/preços não homologados como definitivos
+- Demo aritmética **nunca** é regra `homologated` (`ruleStatus`)
+- Não publicar preços/regras não homologados como definitivos
 
-## Status (2026-11-14)
+## Bloqueios de produção
 
-E0–E6 entregues no `main`. E7 = scaffold de checklist/pendências (lançamento **não** aprovado). Produção bloqueada por regras `homologated`, pagamentos reais e ERP certificado — ver `docs/lancamento-checklist.md` e P01–P14 em `docs/03`.
+Ver `docs/lancamento-checklist.md` e P01–P14 em `docs/03_FONTES_E_PENDENCIAS.md`: regras `homologated`, pagamentos reais, ERP certificado.

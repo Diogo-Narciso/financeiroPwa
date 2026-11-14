@@ -50,7 +50,7 @@ packages/nfe-parser/   # XML NF-e
 packages/classifier/   # sugestões de classificação
 packages/tax-engine/   # motor (demo + pending)
 infra/migrations/      # 001…008
-docs/                  # especificação v1.4
+docs/                  # especificação v1.4 + ADR-001 + schema-inventory + metrics-glossary
 ```
 
 ## Status E0–E7
