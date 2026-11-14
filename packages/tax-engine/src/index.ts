@@ -14,3 +14,8 @@ export {
   type IllustrativeResult,
 } from "./arithmetic-demo";
 export { evaluateItemTax, type TaxEvalInput, type TaxEvalResult } from "./evaluate";
+export {
+  buildRuleInventory,
+  summarizeRuleInventory,
+  type InventoryRow,
+} from "./rule-inventory";
