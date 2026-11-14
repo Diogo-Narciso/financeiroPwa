@@ -1,4 +1,5 @@
 import { ExportError, buildExportZip } from "@/server/export-zip";
+import { canAccessExportDownload } from "@/server/export-download-role-gate";
 import { jsonError, jsonOk } from "@/server/http";
 import { requireUser } from "@/server/session";
 
@@ -7,7 +8,8 @@ export const runtime = "nodejs";
 export async function POST(request: Request) {
   try {
     const user = await requireUser();
-    if (!["owner", "admin", "reviewer", "analyst"].includes(user.role)) {
+    // H49 / H54 / H62: same roles via shared helper
+    if (!canAccessExportDownload(user.role)) {
       return jsonOk({ error: "Sem permissão." }, 403);
     }
     const body = (await request.json()) as { companyId?: string };
