@@ -167,6 +167,7 @@ export async function createTaxRun(args: {
     results.push({
       invoiceItemId: item.id,
       outcome: evalResult.outcome,
+      ruleStatus: evalResult.ruleStatus,
       message: evalResult.message,
       pendingFields: evalResult.pendingFields,
       icmsDifal: evalResult.icmsDifal,
@@ -187,6 +188,7 @@ export async function createTaxRun(args: {
     results.push({
       invoiceItemId: null,
       outcome: evalResult.outcome,
+      ruleStatus: evalResult.ruleStatus,
       message: evalResult.message,
       pendingFields: evalResult.pendingFields,
       icmsDifal: evalResult.icmsDifal,
