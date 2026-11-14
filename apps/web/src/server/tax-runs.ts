@@ -6,6 +6,7 @@ import {
 } from "@portal-difal/tax-engine";
 import { getPool } from "./db";
 import { audit } from "./session";
+import { assertTenantResource } from "./tenant-guard";
 
 export class TaxRunError extends Error {
   status: number;
@@ -217,7 +218,12 @@ export async function getTaxRun(args: { tenantId: string; runId: string }) {
     `SELECT * FROM tax_runs WHERE id = $1 AND tenant_id = $2`,
     [args.runId, args.tenantId],
   );
+  // Defense in depth (H17): never return a row from another tenant.
   if (!run.rows[0]) throw new TaxRunError("NOT_FOUND", "Tax run não encontrado.", 404);
+  assertTenantResource(args.tenantId, {
+    tenantId: String(run.rows[0].tenant_id),
+    id: String(run.rows[0].id),
+  });
 
   const results = await pool.query(
     `SELECT r.*, 
