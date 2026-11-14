@@ -22,7 +22,7 @@
     "e5:smoke": "node scripts/e5-export-smoke.mjs",
     "e6:smoke": "node scripts/e6-billing-smoke.mjs",
     "e7:smoke": "node scripts/e7-homologation-smoke.mjs",
-    "test:unit": "pnpm --filter @portal-difal/nfe-parser test:unit && pnpm --filter @portal-difal/shared test:unit && pnpm --filter @portal-difal/tax-engine test:unit && pnpm --filter @portal-difal/web test:unit && node scripts/h13-ops-assert.mjs && node scripts/h15-evidencias-assert.mjs && node scripts/h16-fixtures-assert.mjs"
+    "test:unit": "pnpm --filter @portal-difal/nfe-parser test:unit && pnpm --filter @portal-difal/shared test:unit && pnpm --filter @portal-difal/tax-engine test:unit && pnpm --filter @portal-difal/web test:unit && node scripts/h13-ops-assert.mjs && node scripts/h15-evidencias-assert.mjs && node scripts/h16-fixtures-assert.mjs && node scripts/h4-fiscal-gaps-assert.mjs"
   },
   "dependencies": {
     "jszip": "^3.10.2"
