@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const doc = readFileSync(join(root, "docs/h194-cancel-plans-refresh11-harness.md"), "utf8");
+const refresh = readFileSync(join(root, "docs/billing-cancel-plans-refresh11.md"), "utf8");
+const cancelProp = readFileSync(join(root, "apps/web/src/server/billing-cancel-role-proposal.ts"), "utf8");
+const plansProp = readFileSync(join(root, "apps/web/src/server/billing-plans-role-proposal.ts"), "utf8");
+const cancelRoute = readFileSync(join(root, "apps/web/src/app/api/billing/cancel/route.ts"), "utf8");
+const plansRoute = readFileSync(join(root, "apps/web/src/app/api/billing/plans/route.ts"), "utf8");
+assert.match(doc, /H194/);
+assert.match(doc, /H90/);
+assert.match(doc, /H86/);
+assert.match(refresh, /GET|POST/);
+assert.match(cancelProp, /matchesBillingCancelRoleProposal/);
+assert.match(plansProp, /matchesBillingPlansRoleProposal/);
+assert.doesNotMatch(cancelRoute, /matchesBillingCancelRoleProposal/);
+assert.doesNotMatch(plansRoute, /matchesBillingPlansRoleProposal/);
+console.log("OK H199 cancel POST ↔ plans GET refresh #11 harness contract");
