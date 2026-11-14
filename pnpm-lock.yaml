@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    dependencies:
+      jszip:
+        specifier: ^3.10.2
+        version: 3.10.2
 
   apps/web:
     dependencies:
