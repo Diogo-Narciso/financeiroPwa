@@ -1,4 +1,8 @@
-import { TRIAL_LIMITS } from "@portal-difal/shared";
+import {
+  TRIAL_LIMITS,
+  evaluateCompanyQuota,
+  evaluateEntryInvoiceQuota,
+} from "@portal-difal/shared";
 import type pg from "pg";
 import { getPool } from "./db";
 import { audit } from "./session";
@@ -75,7 +79,8 @@ export async function createCompanyWithQuota(args: {
       [args.tenantId],
     );
     const used = Number(countRows[0]?.count ?? 0);
-    if (used >= TRIAL_LIMITS.maxCompaniesPerOrg) {
+    const companyQuota = evaluateCompanyQuota(used);
+    if (!companyQuota.allowed) {
       await audit(client, {
         tenantId: args.tenantId,
         actorUserId: args.actorUserId,
@@ -83,7 +88,7 @@ export async function createCompanyWithQuota(args: {
         detail: { used, limit: TRIAL_LIMITS.maxCompaniesPerOrg, cnpj: args.cnpj },
       });
       throw new QuotaError(
-        "TRIAL_COMPANY_LIMIT",
+        companyQuota.code,
         `Limite do teste gratuito: no máximo ${TRIAL_LIMITS.maxCompaniesPerOrg} CNPJs por organização. Arquivar não libera vaga.`,
       );
     }
@@ -186,7 +191,8 @@ export async function reserveEntryInvoiceQuota(args: {
       [args.tenantId, args.companyId],
     );
     const used = Number(countRows[0]?.count ?? 0);
-    if (used >= TRIAL_LIMITS.maxEntryInvoicesPerCompany) {
+    const entryQuota = evaluateEntryInvoiceQuota(used);
+    if (!entryQuota.allowed) {
       await audit(client, {
         tenantId: args.tenantId,
         actorUserId: args.actorUserId,
@@ -200,7 +206,7 @@ export async function reserveEntryInvoiceQuota(args: {
         },
       });
       throw new QuotaError(
-        "TRIAL_ENTRY_INVOICE_LIMIT",
+        entryQuota.code,
         `Limite do teste gratuito: no máximo ${TRIAL_LIMITS.maxEntryInvoicesPerCompany} NF-e de entrada por CNPJ.`,
       );
     }

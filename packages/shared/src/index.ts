@@ -47,11 +47,14 @@ export const ORG_KINDS = [
 
 export type OrgKind = (typeof ORG_KINDS)[number];
 
-/** Trial quotas from docs/apoio/CONFIGURACAO_INICIAL_REFERENCIA.json */
-export const TRIAL_LIMITS = {
-  maxCompaniesPerOrg: 3,
-  maxEntryInvoicesPerCompany: 5,
-} as const;
+export { TRIAL_LIMITS } from "./limits";
+export {
+  countActiveEntryUsage,
+  countsTowardEntryQuota,
+  evaluateCompanyQuota,
+  evaluateEntryInvoiceQuota,
+} from "./quota-policy";
+export type { QuotaDecision } from "./quota-policy";
 
 export const TAX_REGIMES = [
   "simples_nacional",

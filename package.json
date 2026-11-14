@@ -21,7 +21,8 @@
     "e4:smoke": "node scripts/e4-tax-smoke.mjs",
     "e5:smoke": "node scripts/e5-export-smoke.mjs",
     "e6:smoke": "node scripts/e6-billing-smoke.mjs",
-    "e7:smoke": "node scripts/e7-homologation-smoke.mjs"
+    "e7:smoke": "node scripts/e7-homologation-smoke.mjs",
+    "test:unit": "pnpm --filter @portal-difal/nfe-parser test:unit && pnpm --filter @portal-difal/shared test:unit"
   },
   "dependencies": {
     "jszip": "^3.10.2"

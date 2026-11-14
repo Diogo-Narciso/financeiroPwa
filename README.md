@@ -24,7 +24,11 @@ pnpm dev                # http://127.0.0.1:3000
 
 # Smokes (dev server no ar)
 pnpm e1:smoke … pnpm e7:smoke
+
+# Unit tests (nfe-parser + quota policy — sem banco)
+pnpm test:unit
 ```
+
 
 Saúde:
 
