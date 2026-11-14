@@ -1,6 +1,12 @@
 export { Decimal, d, roundMoney } from "./decimal";
 export { TAX_MODULES, MODULE_STATUS } from "./modules";
 export {
+  RULE_PUBLICATION_STATUS,
+  isDemoOnlyStatus,
+  isHomologatedStatus,
+  type RulePublicationStatus,
+} from "./rule-status";
+export {
   assertDemoCase,
   computeIllustrativeGrossUpDifal,
   DEMO_CASES,

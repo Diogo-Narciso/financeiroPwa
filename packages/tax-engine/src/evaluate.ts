@@ -3,6 +3,10 @@ import {
   computeIllustrativeGrossUpDifal,
   type IllustrativeInputs,
 } from "./arithmetic-demo";
+import {
+  RULE_PUBLICATION_STATUS,
+  type RulePublicationStatus,
+} from "./rule-status";
 
 export type TaxEvalInput = {
   module: string;
@@ -20,6 +24,8 @@ export type TaxEvalResult = {
     | "fora_do_escopo_homologado"
     | "demo_arithmetic_only"
     | "module_disabled";
+  /** Explicit gate: demo ≠ homologated (H9). */
+  ruleStatus: RulePublicationStatus;
   message: string;
   pendingFields: string[];
   icmsDifal: string | null;
@@ -41,6 +47,7 @@ export function evaluateItemTax(input: TaxEvalInput): TaxEvalResult {
   if (input.module === TAX_MODULES.saleNonContributor) {
     return {
       outcome: "module_disabled",
+      ruleStatus: RULE_PUBLICATION_STATUS.disabled,
       message: MODULE_STATUS[TAX_MODULES.saleNonContributor].note,
       pendingFields: ["module_disabled"],
       icmsDifal: null,
@@ -55,6 +62,7 @@ export function evaluateItemTax(input: TaxEvalInput): TaxEvalResult {
   if (input.module !== TAX_MODULES.acquisitionContributor) {
     return {
       outcome: "fora_do_escopo_homologado",
+      ruleStatus: RULE_PUBLICATION_STATUS.out_of_scope,
       message: "Módulo fiscal desconhecido ou fora do escopo.",
       pendingFields: ["module"],
       icmsDifal: null,
@@ -79,10 +87,13 @@ export function evaluateItemTax(input: TaxEvalInput): TaxEvalResult {
     },
   ];
 
+  // Demo path is explicit and never upgrades to homologated, even if
+  // hasHomologatedRule is true (caller mistake must not launder demo numbers).
   if (input.demoArithmetic) {
     const demo = computeIllustrativeGrossUpDifal(input.demoArithmetic);
     return {
       outcome: "demo_arithmetic_only",
+      ruleStatus: RULE_PUBLICATION_STATUS.demo,
       message:
         "Resultado aritmético demonstrativo (CASOS_ARITMETICOS). Não é regra fiscal homologada.",
       pendingFields: ["homologacao_fiscal"],
@@ -108,6 +119,7 @@ export function evaluateItemTax(input: TaxEvalInput): TaxEvalResult {
     }
     return {
       outcome: "pending_validation",
+      ruleStatus: RULE_PUBLICATION_STATUS.pending_homologation,
       message:
         "Sem regra homologada para a operação/competência. Pendente de validação — não exibir R$ 0,00 como não incidência.",
       pendingFields: pending,
@@ -120,9 +132,10 @@ export function evaluateItemTax(input: TaxEvalInput): TaxEvalResult {
     };
   }
 
-  // Homologated path not implemented until rules are approved.
+  // Homologated path not implemented until rules are approved — still pending.
   return {
     outcome: "pending_validation",
+    ruleStatus: RULE_PUBLICATION_STATUS.pending_homologation,
     message: "Caminho homologado ainda não publicado para produção.",
     pendingFields: ["implementation_homologated_path"],
     icmsDifal: null,
