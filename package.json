@@ -19,7 +19,8 @@
     "e3:smoke": "node scripts/e3-analysis-smoke.mjs",
     "e4:arit": "pnpm --filter @portal-difal/tax-engine test:arit",
     "e4:smoke": "node scripts/e4-tax-smoke.mjs",
-    "e5:smoke": "node scripts/e5-export-smoke.mjs"
+    "e5:smoke": "node scripts/e5-export-smoke.mjs",
+    "e6:smoke": "node scripts/e6-billing-smoke.mjs"
   },
   "dependencies": {
     "jszip": "^3.10.2"
