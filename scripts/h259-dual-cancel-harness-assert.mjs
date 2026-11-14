@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const doc = readFileSync(join(root, "docs/h254-dual-cancel-refresh23-harness.md"), "utf8");
+const refresh = readFileSync(join(root, "docs/billing-dual-method-cancel-refresh23.md"), "utf8");
+const subProp = readFileSync(join(root, "apps/web/src/server/billing-subscription-role-proposal.ts"), "utf8");
+const cancelProp = readFileSync(join(root, "apps/web/src/server/billing-cancel-role-proposal.ts"), "utf8");
+const subRoute = readFileSync(join(root, "apps/web/src/app/api/billing/subscription/route.ts"), "utf8");
+const cancelRoute = readFileSync(join(root, "apps/web/src/app/api/billing/cancel/route.ts"), "utf8");
+assert.match(doc, /H254/);
+assert.match(doc, /H94/);
+assert.match(doc, /H90/);
+assert.match(refresh, /GET|POST/);
+assert.match(subProp, /matchesBillingSubscriptionRoleProposal/);
+assert.match(cancelProp, /matchesBillingCancelRoleProposal/);
+assert.doesNotMatch(subRoute, /matchesBillingSubscriptionRoleProposal/);
+assert.doesNotMatch(cancelRoute, /matchesBillingCancelRoleProposal/);
+console.log("OK H259 dual-method cancel refresh #23 harness contract");
