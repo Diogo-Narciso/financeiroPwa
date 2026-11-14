@@ -19,3 +19,10 @@ export {
   summarizeRuleInventory,
   type InventoryRow,
 } from "./rule-inventory";
+export {
+  RJ_MATRIX_FIELD_KEYS,
+  emptyRjMatrixDraft,
+  requiredRjFieldsMissing,
+  type RjMatrixFieldKey,
+  type RjMatrixTemplateDraft,
+} from "./rj-matrix-template";
