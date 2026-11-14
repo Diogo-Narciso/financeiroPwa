@@ -1,0 +1,34 @@
+# Nota refresh #19 — dual GET/POST subscription vs cancel (H230 / H224 · H221)
+
+**Status:** nota de refresh · **não** altera ACL · **não** fecha E-R01  
+**Fontes:** `docs/billing-dual-method-cancel-refresh18.md` (H224) · `docs/billing-dual-method-cancel-refresh17.md` (H221)
+
+## Comparativo
+
+| Path | Métodos | Roles draft | Fonte |
+|---|---|---|---|
+| `billing/subscription` | GET \| POST | owner \| admin | H224 / H221 |
+| `billing/cancel` | POST | owner \| admin | H224 / H221 |
+
+## Achado
+
+Décimo nono refresh confirma convergência dual-method + cancel no draft `owner | admin`; sem proposta owner-only.
+
+## Campos
+
+| Campo | Valor |
+|---|---|
+| `aclChangedInThisPR` | **false** |
+| `eR01Closed` | **false** |
+
+## Proibições
+
+- Não editar routes neste PR.
+- Não inventar owner-only / PSP cert.
+- Não fechar E-R01/G-R01.
+
+## CTs
+
+- CT-dcr19-01: cita H224 / H221 / GET / POST  
+- CT-dcr19-02: aclChangedInThisPR false  
+- CT-dcr19-03: assert CI
