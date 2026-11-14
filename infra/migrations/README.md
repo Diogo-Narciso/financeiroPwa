@@ -14,3 +14,4 @@ pnpm db:status
 | `005_e4_tax_engine.sql` | E4 versioned rules / runs / benefits |
 
 Fiscal amounts in production require `homologated` rule versions — demos stay `demo_arithmetic` / `pending_homologation`.
+| `006_e5_bookkeeping_export.sql` | E5 CFOP escrituração / export ZIP |
