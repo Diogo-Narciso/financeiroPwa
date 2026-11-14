@@ -1,6 +1,7 @@
 import { DEMO_CASES } from "@portal-difal/tax-engine";
 import { jsonError, jsonOk } from "@/server/http";
 import { requireUser } from "@/server/session";
+import { canAccessTaxRun } from "@/server/tax-run-role-gate";
 import { TaxRunError, createTaxRun } from "@/server/tax-runs";
 
 export const runtime = "nodejs";
@@ -8,7 +9,7 @@ export const runtime = "nodejs";
 export async function POST(request: Request) {
   try {
     const user = await requireUser();
-    if (!["owner", "admin", "analyst", "reviewer"].includes(user.role)) {
+    if (!canAccessTaxRun(user.role)) {
       return jsonOk({ error: "Sem permissão." }, 403);
     }
     const body = (await request.json()) as {
