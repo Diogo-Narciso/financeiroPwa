@@ -5,14 +5,17 @@ node_modules/
 out/
 dist/
 coverage/
-.turbo/
 *.tsbuildinfo
+.turbo/
 
 # env / secrets
 .env
 .env.local
 .env.*.local
 !.env.example
+
+# private document storage
+storage/
 
 # OS / IDE
 .DS_Store
@@ -24,7 +27,3 @@ Thumbs.db
 # local scratch
 .tmp/
 .local/
-
-# private document storage
-storage/
-!.gitkeep

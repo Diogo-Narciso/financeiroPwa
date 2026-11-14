@@ -28,6 +28,7 @@ export default async function PainelPage() {
           <Link href="/calculo">Cálculo</Link>
           <Link href="/exportacoes">Exportações</Link>
           <Link href="/planos">Planos</Link>
+          <Link href="/homologacao">Homologação</Link>
           <span className={styles.chip}>{user.orgName}</span>
           <span className={styles.muted}>{user.email}</span>
           <LogoutButton />
@@ -39,7 +40,8 @@ export default async function PainelPage() {
             <h1 className={styles.h1}>Olá{user.displayName ? `, ${user.displayName}` : ""}</h1>
             <p className={styles.muted}>
               Organização <strong>{user.orgName}</strong> ({user.orgKind}) · papel{" "}
-              {user.role}. Etapa E1 — cadastro e cotas do teste.
+              {user.role}. E0–E6 no ar · homologação em{" "}
+              <Link href="/homologacao">/homologacao</Link>.
             </p>
           </div>
           <section className={`${styles.card} ${styles.stack}`}>
