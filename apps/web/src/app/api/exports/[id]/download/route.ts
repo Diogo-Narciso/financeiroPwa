@@ -8,6 +8,10 @@ type Params = { params: Promise<{ id: string }> };
 export async function GET(_request: Request, { params }: Params) {
   try {
     const user = await requireUser();
+    // H49 / E-R03: align with POST /api/exports role gate
+    if (!["owner", "admin", "reviewer", "analyst"].includes(user.role)) {
+      return jsonOk({ error: "Sem permissão." }, 403);
+    }
     const { id } = await params;
     const file = await readExportZip({ tenantId: user.tenantId, exportJobId: id });
     return new Response(new Uint8Array(file.bytes), {
