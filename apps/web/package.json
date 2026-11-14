@@ -8,7 +8,7 @@
     "start": "next start --hostname 127.0.0.1 --port 3000",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test:unit": "tsx src/server/billing-provider.test.ts && tsx src/server/tenant-guard.test.ts && tsx src/server/tax-run-role-gate.test.ts && tsx src/server/export-download-role-gate.test.ts && tsx src/server/company-get-role-proposal.test.ts && tsx src/server/imports-id-role-proposal.test.ts"
+    "test:unit": "tsx src/server/billing-provider.test.ts && tsx src/server/tenant-guard.test.ts && tsx src/server/tax-run-role-gate.test.ts && tsx src/server/export-download-role-gate.test.ts && tsx src/server/company-get-role-proposal.test.ts && tsx src/server/imports-id-role-proposal.test.ts && tsx src/server/quotas-reserve-role-proposal.test.ts"
   },
   "dependencies": {
     "@portal-difal/classifier": "workspace:*",
