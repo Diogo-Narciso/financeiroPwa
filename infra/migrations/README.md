@@ -15,3 +15,6 @@ pnpm db:status
 
 Fiscal amounts in production require `homologated` rule versions — demos stay `demo_arithmetic` / `pending_homologation`.
 | `006_e5_bookkeeping_export.sql` | E5 CFOP escrituração / export ZIP |
+| `007_e6_billing_contracts.sql` | E6 plans / subscriptions / contracts / mock billing |
+
+Paid `plan_versions` may carry **placeholder** cents (`is_price_placeholder=true`) for sandbox UI only — never treat as official commercial prices. `plans.publishable=false` until commercial + legal approval.
