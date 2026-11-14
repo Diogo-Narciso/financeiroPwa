@@ -5,8 +5,9 @@ import styles from "./page.module.css";
 const STAGES = [
   { id: "E0", title: "Fundação", detail: "Monorepo, banco, saúde e casca da aplicação.", active: false },
   { id: "E1", title: "Cadastro e teste", detail: "Login, organizações, empresas e quotas.", active: false },
-  { id: "E2", title: "Documentos", detail: "Upload XML/ZIP e storage imutável.", active: true },
-  { id: "E3+", title: "Motor e escrituração", detail: "Classificação, DIFAL homologado e exportação.", active: false },
+  { id: "E2", title: "Documentos", detail: "Upload XML/ZIP e storage imutável.", active: false },
+  { id: "E3", title: "Revisão", detail: "Classificação, ST/retenção, manual e auditoria.", active: true },
+  { id: "E4+", title: "Motor e escrituração", detail: "DIFAL homologado e exportação.", active: false },
 ] as const;
 
 function statusClass(value: string): string {
@@ -33,7 +34,7 @@ export default async function HomePage() {
           </div>
         </div>
         <div className={styles.headerActions}>
-          <span className={styles.stageBadge}>E2 · Documentos</span>
+          <span className={styles.stageBadge}>E3 · Revisão</span>
           <a className={styles.ghostLink} href="/api/health">
             /api/health
           </a>

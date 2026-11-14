@@ -98,25 +98,52 @@ function parseIcmsBlock(imposto: Record<string, unknown> | null): {
   base: string | null;
   rate: string | null;
   value: string | null;
+  stHints: Record<string, string | boolean | null>;
 } {
   if (!imposto) {
-    return { cst: null, origin: null, base: null, rate: null, value: null };
+    return {
+      cst: null,
+      origin: null,
+      base: null,
+      rate: null,
+      value: null,
+      stHints: { hasIcmsSt: false, hasStRet: false },
+    };
   }
   const icms = asRecord(imposto.ICMS) ?? {};
-  // Pick first ICMS* child
+  let cst: string | null = null;
+  let origin: string | null = null;
+  let base: string | null = null;
+  let rate: string | null = null;
+  let value: string | null = null;
+  const stHints: Record<string, string | boolean | null> = {
+    hasIcmsSt: false,
+    hasStRet: false,
+  };
+
   for (const [k, v] of Object.entries(icms)) {
     if (!k.startsWith("ICMS")) continue;
     const block = asRecord(first(v));
     if (!block) continue;
-    return {
-      cst: text(block.CST) ?? text(block.CSOSN),
-      origin: text(block.orig),
-      base: text(block.vBC),
-      rate: text(block.pICMS),
-      value: text(block.vICMS),
-    };
+    if (!cst) {
+      cst = text(block.CST) ?? text(block.CSOSN);
+      origin = text(block.orig);
+      base = text(block.vBC);
+      rate = text(block.pICMS);
+      value = text(block.vICMS);
+    }
+    if (text(block.vICMSST) != null || text(block.vBCST) != null) {
+      stHints.hasIcmsSt = true;
+      stHints.vICMSST = text(block.vICMSST);
+      stHints.vBCST = text(block.vBCST);
+    }
+    if (text(block.vICMSSTRet) != null || text(block.vBCSTRet) != null) {
+      stHints.hasStRet = true;
+      stHints.vICMSSTRet = text(block.vICMSSTRet);
+      stHints.vBCSTRet = text(block.vBCSTRet);
+    }
   }
-  return { cst: null, origin: null, base: null, rate: null, value: null };
+  return { cst, origin, base, rate, value, stHints };
 }
 
 /**
@@ -257,6 +284,7 @@ export function parseNfeXml(xmlBytes: Buffer | string): ParsedNfe {
           vDesc: prod.vDesc === undefined ? "absent" : text(prod.vDesc) === "0.00" || text(prod.vDesc) === "0" ? "explicit_zero" : "present",
           vFrete: prod.vFrete === undefined ? "absent" : "present",
         },
+        ...icms.stHints,
       },
     };
   });

@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@portal-difal/classifier": "workspace:*",
     "@portal-difal/db": "workspace:*",
     "@portal-difal/nfe-parser": "workspace:*",
     "@portal-difal/shared": "workspace:*",
