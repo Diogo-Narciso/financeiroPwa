@@ -16,6 +16,8 @@
     "db:status": "pnpm --filter @portal-difal/db status",
     "e1:smoke": "node scripts/e1-quota-smoke.mjs",
     "e2:smoke": "node scripts/e2-import-smoke.mjs",
-    "e3:smoke": "node scripts/e3-analysis-smoke.mjs"
+    "e3:smoke": "node scripts/e3-analysis-smoke.mjs",
+    "e4:arit": "pnpm --filter @portal-difal/tax-engine test:arit",
+    "e4:smoke": "node scripts/e4-tax-smoke.mjs"
   }
 }

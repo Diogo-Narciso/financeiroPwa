@@ -25,6 +25,7 @@ export default async function PainelPage() {
           <Link href="/empresas">Empresas</Link>
           <Link href="/importar">Importar</Link>
           <Link href="/analises">Análises</Link>
+          <Link href="/calculo">Cálculo</Link>
           <span className={styles.chip}>{user.orgName}</span>
           <span className={styles.muted}>{user.email}</span>
           <LogoutButton />
