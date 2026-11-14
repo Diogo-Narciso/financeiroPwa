@@ -28,7 +28,7 @@
 | G1 | P0 | Testes de isolamento tenant / anti-IDOR além de smokes | H17 |
 | G2 | P1 | RLS Postgres explícito (hoje app-layer) | H17 / security |
 | G3 | P1 | Retenção/purge LGPD de uploads e audit | H11 |
-| G4 | P1 | Drill backup/restore documentado + script | H13 |
+| G4 | P1 | Drill backup/restore documentado + script | H13 → `docs/ops-backup-restore.md` (local; P13 parcial) |
 | G5 | P2 | Índice/consulta agregada para métricas MVP | H19 → dba se precisar DDL |
 | G6 | P2 | Coluna persistida `rule_status` em `tax_item_results` (hoje só no payload) | opcional pós-H9 |
 
