@@ -12,6 +12,19 @@ const route = readFileSync(
 );
 assert.match(doc, /E-R02/);
 assert.match(doc, /owner.*admin.*analyst.*reviewer|owner \| admin/);
-assert.match(route, /\["owner", "admin", "analyst", "reviewer"\]/);
+// H53: roles live in tax-run-role-gate; route uses canAccessTaxRun
+const literal = /\["owner", "admin", "analyst", "reviewer"\]/;
+if (!literal.test(route)) {
+  assert.match(route, /canAccessTaxRun/);
+  const gate = readFileSync(
+    join(root, "apps/web/src/server/tax-run-role-gate.ts"),
+    "utf8",
+  );
+  assert.match(gate, /TAX_RUN_ROLES/);
+  assert.match(gate, /"owner"/);
+  assert.match(gate, /"admin"/);
+  assert.match(gate, /"analyst"/);
+  assert.match(gate, /"reviewer"/);
+}
 assert.match(route, /403/);
 console.log("OK H48 tax-runs/[id] role align contract");
