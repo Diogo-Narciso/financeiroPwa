@@ -1,6 +1,6 @@
 # Escopo de produto — Portal Inteligente de DIFAL
 
-**Canais:** aplicação **web** (navegador) e **aplicativo** (mobile / PWA instalável). Mesma conta, mesmas regras fiscais e mesmos dados.
+**Canais:** aplicação **web** (navegador — entregue) e **aplicativo** (mobile / PWA — **adiado**, ADR-001). Mesma conta, mesmas regras fiscais e mesmos dados quando o segundo canal for promovido.
 
 ## O que a aplicação busca entregar
 
