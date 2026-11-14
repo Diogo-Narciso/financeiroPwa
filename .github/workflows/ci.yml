@@ -19,3 +19,5 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
+      # H7: unit suite from H6 must gate PRs (smokes E1–E7 still need app+DB — local/H8+)
+      - run: pnpm test:unit
