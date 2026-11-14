@@ -29,6 +29,8 @@ pnpm e1:smoke … pnpm e7:smoke
 pnpm test:unit
 ```
 
+CI (GitHub Actions) roda `pnpm typecheck` e `pnpm test:unit` em push/PR. Smokes `e1`…`e7` continuam manuais (exigem app + Postgres).
+
 
 Saúde:
 
