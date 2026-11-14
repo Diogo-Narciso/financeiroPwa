@@ -4,7 +4,7 @@
 
 SaaS fiscal multiempresa para escritórios e empresas no Brasil (início RJ). **Um produto, dois canais:** aplicativo **web** (navegador) e **mobile** (PWA instalável ou shell nativo), compartilhando a mesma conta, as mesmas regras e o mesmo backend.
 
-> **Etapa atual: E0 — Fundação.** Monorepo TypeScript, Postgres, rota de saúde e casca da UI. Sem login, quotas, motor fiscal ou regras tributárias inventadas. Cliente PWA/mobile virá depois, no mesmo backend.
+> **Etapa atual: E1 — Cadastro e teste.** Login/cadastro, organizações, empresas (CNPJ), perfil tributário, questionário e cotas do teste no servidor (3 CNPJs / 5 NF-e). Sem alíquotas inventadas. Importação XML = E2. PWA/mobile depois.
 
 ## Como rodar localmente
 
@@ -21,6 +21,9 @@ docker compose up -d
 pnpm db:migrate
 pnpm db:status          # opcional
 pnpm dev                # http://127.0.0.1:3000
+
+# Smoke das cotas E1 (com o dev server no ar)
+pnpm e1:smoke
 ```
 
 Saúde:
@@ -75,8 +78,8 @@ Resumo: [`docs/escopo-produto.md`](docs/escopo-produto.md).
 
 | Etapa | Conteúdo |
 |---|---|
-| **E0** Fundação | Repo, DB, health, casca UI ← *esta entrega* |
-| **E1** Cadastro e teste | Login, orgs, empresas, quotas |
+| **E0** Fundação | Repo, DB, health, casca UI |
+| **E1** Cadastro | Login, orgs, empresas, cotas ← *esta entrega* |
 | **E2** Documentos | Upload XML/ZIP, storage imutável |
 | **E3** Revisão | Classificação, ST, manual, auditoria |
 | **E4** Motor | DIFAL/FECP, benefícios versionados |

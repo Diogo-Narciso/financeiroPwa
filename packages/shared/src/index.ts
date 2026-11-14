@@ -1,4 +1,4 @@
-/** Shared types and constants — E0 foundation only (no tax rules). */
+/** Shared types and constants — E0/E1 (no tax rates). */
 
 export const APP_NAME = "Portal Inteligente de DIFAL" as const;
 
@@ -25,9 +25,7 @@ export type HealthResponse = {
   service: string;
   version: string;
   timestamp: string;
-  checks: {
-    database: "up" | "down" | "skipped";
-  };
+  checks: { database: "up" | "down" | "skipped" };
 };
 
 export const ORG_ROLES = [
@@ -41,8 +39,68 @@ export const ORG_ROLES = [
 
 export type OrgRole = (typeof ORG_ROLES)[number];
 
-/** Trial quotas from product spec — enforced in E1, declared here for contracts. */
+export const ORG_KINDS = [
+  "accounting_firm",
+  "company",
+  "individual",
+] as const;
+
+export type OrgKind = (typeof ORG_KINDS)[number];
+
+/** Trial quotas from docs/apoio/CONFIGURACAO_INICIAL_REFERENCIA.json */
 export const TRIAL_LIMITS = {
   maxCompaniesPerOrg: 3,
   maxEntryInvoicesPerCompany: 5,
 } as const;
+
+export const TAX_REGIMES = [
+  "simples_nacional",
+  "regime_normal",
+  "outro",
+  "nao_sei",
+] as const;
+
+export type TaxRegime = (typeof TAX_REGIMES)[number];
+
+export const ICMS_TAXPAYER_OPTIONS = [
+  "contribuinte",
+  "nao_contribuinte",
+  "nao_sei",
+] as const;
+
+export type IcmsTaxpayer = (typeof ICMS_TAXPAYER_OPTIONS)[number];
+
+export const ACTIVITY_SECTORS = [
+  "comercio_varejista",
+  "atacado",
+  "industria",
+  "alimentos",
+  "servicos",
+  "transportes",
+  "saude",
+  "construcao",
+  "agronegocio",
+  "comercio_eletronico",
+  "outro",
+] as const;
+
+export type ActivitySector = (typeof ACTIVITY_SECTORS)[number];
+
+export const ACTIVITY_QUESTIONS = [
+  { id: "revende", label: "Revende mercadorias?" },
+  { id: "fabrica", label: "Fabrica produtos?" },
+  { id: "materia_prima", label: "Utiliza matéria-prima / insumos?" },
+  { id: "embalagem", label: "Utiliza embalagens?" },
+  { id: "ativo", label: "Adquire bens de ativo imobilizado?" },
+  { id: "equipamentos", label: "Comercializa equipamentos / máquinas?" },
+  { id: "servicos", label: "Presta serviços?" },
+  { id: "st", label: "Opera com mercadorias sujeitas a ST?" },
+  { id: "vende_e_usa", label: "Vende e também usa internamente o mesmo produto?" },
+] as const;
+
+export type ActivityAnswer = "sim" | "nao" | "nao_sei";
+
+export const BRAZIL_UFS = [
+  "AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG",
+  "PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO",
+] as const;

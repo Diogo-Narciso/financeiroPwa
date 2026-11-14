@@ -7,4 +7,9 @@ pnpm db:migrate
 pnpm db:status
 ```
 
-Files must match `NNN_description.sql`. **E0** ships `001_foundation.sql` only (identity/tenancy). No tax-rule tables until homologated.
+| File | Stage |
+|---|---|
+| `001_foundation.sql` | E0 identity/tenancy |
+| `002_e1_auth_quotas_profiles.sql` | E1 sessions, trial quotas, profiles |
+
+No fiscal rate tables until homologated.

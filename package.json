@@ -13,6 +13,7 @@
     "lint": "pnpm -r --if-present lint",
     "typecheck": "pnpm -r --if-present typecheck",
     "db:migrate": "pnpm --filter @portal-difal/db migrate",
-    "db:status": "pnpm --filter @portal-difal/db status"
+    "db:status": "pnpm --filter @portal-difal/db status",
+    "e1:smoke": "node scripts/e1-quota-smoke.mjs"
   }
 }

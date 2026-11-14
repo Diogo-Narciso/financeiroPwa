@@ -1,0 +1,129 @@
+.page {
+  width: min(920px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.35rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.stack { display: grid; gap: 1rem; }
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  background: rgb(255 255 255 / 90%);
+}
+
+.navLinks { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+
+.brand {
+  font-family: var(--font-ibm-plex), var(--font-display);
+  font-weight: 650;
+  color: var(--color-teal-dark);
+}
+
+.h1 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-ibm-plex), var(--font-display);
+  font-size: 1.6rem;
+}
+
+.muted { color: var(--color-gray-500); margin: 0; font-size: 0.95rem; }
+
+.label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--color-gray-700);
+}
+
+.input, .select, .textarea {
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.35rem;
+  padding: 0.55rem 0.7rem;
+  background: white;
+}
+
+.row { display: grid; gap: 0.85rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+.btn {
+  border: none;
+  border-radius: 0.35rem;
+  padding: 0.55rem 0.95rem;
+  background: var(--color-teal);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  background: white;
+  color: var(--color-gray-700);
+  border: 1px solid var(--color-gray-200);
+}
+
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.error {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.35rem;
+  margin: 0;
+}
+
+.ok {
+  color: var(--color-success);
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.35rem;
+  margin: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.table th, .table td {
+  text-align: left;
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.chip {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.3rem;
+  background: var(--color-teal-muted);
+  color: var(--color-teal-dark);
+}
+
+.sectorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.45rem;
+}
+
+.sectorItem, .qItem {
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.4rem;
+  padding: 0.55rem 0.65rem;
+  background: var(--color-gray-50);
+}
+
+.qItem { display: grid; gap: 0.4rem; }
