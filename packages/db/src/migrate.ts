@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -7,7 +8,15 @@ import { createPool } from "./client";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export function migrationsDir(): string {
-  return path.resolve(__dirname, "../../../infra/migrations");
+  const candidates = [
+    path.resolve(process.cwd(), "infra/migrations"),
+    path.resolve(process.cwd(), "../../infra/migrations"),
+    path.resolve(__dirname, "../../../infra/migrations"),
+  ];
+  for (const dir of candidates) {
+    if (existsSync(dir)) return dir;
+  }
+  return candidates[0]!;
 }
 
 async function ensureMigrationsTable(client: pg.PoolClient): Promise<void> {
