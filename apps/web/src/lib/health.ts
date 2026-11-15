@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { HealthResponse } from "@portal-difal/shared";
 import { checkDatabase } from "@portal-difal/db";
+import { getReadyPool } from "@/server/db";
 
 /** Load repo-root `.env` when Next only saw `apps/web/.env`. */
 function ensureDatabaseUrl(): void {
@@ -32,6 +33,14 @@ function ensureDatabaseUrl(): void {
 
 export async function getHealth(): Promise<HealthResponse> {
   ensureDatabaseUrl();
+  // Warm schema on published empty DBs (no instrumentation at build time).
+  if (process.env.DATABASE_URL) {
+    try {
+      await getReadyPool();
+    } catch {
+      /* checkDatabase below reports down */
+    }
+  }
   const database = await checkDatabase(process.env.DATABASE_URL);
   const status: HealthResponse["status"] =
     database === "up" ? "ok" : database === "skipped" ? "degraded" : "error";
