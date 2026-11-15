@@ -1,5 +1,5 @@
 import type { OrgKind } from "@portal-difal/shared";
-import { getPool } from "./db";
+import { getPool, getReadyPool } from "./db";
 import { assertPasswordPolicy, hashPassword, verifyPassword } from "./password";
 import { audit, createSession } from "./session";
 
@@ -26,7 +26,7 @@ export async function signup(args: {
   const pwdErr = assertPasswordPolicy(args.password);
   if (pwdErr) throw new AuthServiceError(pwdErr);
 
-  const pool = getPool();
+  const pool = await getReadyPool();
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
@@ -82,7 +82,8 @@ export async function login(args: {
   password: string;
 }): Promise<{ userId: string; token: string }> {
   const email = args.email.trim().toLowerCase();
-  const { rows } = await getPool().query<{
+  const pool = await getReadyPool();
+  const { rows } = await pool.query<{
     id: string;
     password_hash: string | null;
   }>(`SELECT id, password_hash FROM users WHERE email = $1`, [email]);

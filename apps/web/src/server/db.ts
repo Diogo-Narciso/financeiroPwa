@@ -1,9 +1,10 @@
-import { createPool } from "@portal-difal/db";
+import { createPool, runMigrations } from "@portal-difal/db";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type pg from "pg";
 
 let pool: pg.Pool | null = null;
+let schemaReady: Promise<void> | null = null;
 
 function ensureEnv(): void {
   if (process.env.DATABASE_URL) return;
@@ -31,8 +32,23 @@ function ensureEnv(): void {
   }
 }
 
+async function ensureSchema(): Promise<void> {
+  ensureEnv();
+  if (!process.env.DATABASE_URL) return;
+  if (!schemaReady) {
+    schemaReady = runMigrations(process.env.DATABASE_URL).then(() => undefined);
+  }
+  await schemaReady;
+}
+
 export function getPool(): pg.Pool {
   ensureEnv();
   if (!pool) pool = createPool(process.env.DATABASE_URL);
   return pool;
+}
+
+/** Await schema migrations before first query (signup/login/etc.). */
+export async function getReadyPool(): Promise<pg.Pool> {
+  await ensureSchema();
+  return getPool();
 }
