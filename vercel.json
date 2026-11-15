@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm db:migrate && pnpm --filter @portal-difal/web build && ln -sfn apps/web/.next .next",
+  "buildCommand": "node scripts/migrate-if-database-url.mjs && pnpm --filter @portal-difal/web build && ln -sfn apps/web/.next .next",
   "outputDirectory": "apps/web/.next"
 }
